@@ -8,7 +8,7 @@ function Banner() {
         (async () => {
             try {
                 const request = await Axios.get(Requests.fetchNetflixOriginals);
-                console.log("የመጣው ዳታ፦", request.data.results); // <--- ይሄንን ጨምር
+                console.log("display dat", request.data.results);
                 setMovie(
                     request.data.results[
                     Math.floor(Math.random() * request.data.results.length)
@@ -21,14 +21,16 @@ function Banner() {
     }, []);
     return (
         <div>
-            <div className='banner' style={{
-                backgroundSize: "cover",
-                backgroundImage: `url("https://image.tmdb.org/t/p/original${movie?.backdrop_path}")`,
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat"
+            <div
+                className="banner"
+                style={{
+                    backgroundSize: "cover",
+                    backgroundImage: movie?.backdrop_path ? ` url("https://image.tmdb.org/t/p/original${movie?.backdrop_path}")`
+                        : "none",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                }}>
 
-            }}
-            >
                 <div className='banner-containers'>
                     <h3 className='banner-title'>
                         {movie?.title || movie?.name || movie?.original_name}
